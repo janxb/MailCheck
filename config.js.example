@@ -1,0 +1,3 @@
+var Config = {
+	language: "german"
+};
