@@ -4,7 +4,8 @@
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<title>MailCheck</title>
-		<link rel="stylesheet" href="//cdn.jsdelivr.net/g/bootstrap@3.3.6(css/bootstrap.min.css),sweetalert@1.1.3(sweetalert.css)"/>
+		<link rel="stylesheet" href="//cdn.jsdelivr.net/g/bootstrap@3.3.6(css/bootstrap.min.css),sweetalert@1.1.3(sweetalert.css)">
+		<link rel="stylesheet" href="//cdn.jsdelivr.net/fontawesome/4.6.2/css/font-awesome.min.css"/>
 		<link rel="stylesheet" href="index.css<?= APP_VERSION ?>"/>
 	</head>
 	<body>
@@ -26,7 +27,28 @@
 				<h3 class="panel-title" data-bind="text:Translation.get('result')"></h3>
 			</div>
 			<div class="panel-body">
-				ergebnisse
+				<div class="resultpanel">
+					<div class="checksingle">
+						<p data-bind="visible:resultSingle()">
+							<i class="statusicon fa fa-check-circle-o green"></i>
+							<b data-bind="text:Translation.get('emailexisting')"></b>
+						</p>
+						<p data-bind="visible:!resultSingle()">
+							<i class="statusicon fa fa-times-circle-o red"></i>
+							<b data-bind="text:Translation.get('emailnotexisting')"></b>
+						</p>
+					</div>
+					<div class="checkwildcard" data-bind="visible:resultSingle()">
+						<p data-bind="visible:!resultCatchall()">
+							<i class="statusicon fa fa-check-circle-o green"></i>
+							<b data-bind="text:Translation.get('catchallnotexisting')"></b>
+						</p>
+						<p data-bind="visible:resultCatchall()">
+							<i class="statusicon fa fa-times-circle-o red"></i>
+							<b data-bind="text:Translation.get('catchallexisting')"></b>
+						</p>
+					</div>
+				</div>
 			</div>
 		</div>
 
@@ -47,7 +69,7 @@
 		<div data-bind="visible:loading()" class="loading">
 			<div class="inner">
 				<br>
-				<div class="preloader"></div>
+				<span class="cssload-loader"><span class="cssload-loader-inner"></span></span>
 				<br>
 				<p data-bind="text:Translation.get('checkingprogress')"></p>
 			</div>

@@ -13,7 +13,7 @@ var App = function () {
 	}, self);
 
 	self.resultSingle = ko.observable(false);
-	self.resultWildcard = ko.observable(false);
+	self.resultCatchall = ko.observable(false);
 
 
 	self._init = function () {
@@ -22,18 +22,18 @@ var App = function () {
 
 	self.checkMail = function () {
 		self.smtpdialogs.removeAll();
-		self.checkEmailStrict();
+		self.checkEmailSingle();
 		self.checkEmailCatchall();
 	};
 
-	self.checkEmailStrict = function () {
+	self.checkEmailSingle = function () {
 		request('api/check_email.php', {email: self.email}, function (data) {
 			switch (data.error) {
 				case null:
 					data.data.dialogs.forEach(function (dialog) {
 						self.smtpdialogs.push(dialog);
 					});
-					if (data.data.hasOwnProperty('mail_accepted')) {
+					if (data.data !== null) {
 						self.resultSingle(data.data.mail_accepted);
 					} else {
 						self.resultSingle(false);
@@ -54,10 +54,10 @@ var App = function () {
 
 	self.checkEmailCatchall = function () {
 		request('api/check_catchall.php', {email: self.email}, function (data) {
-			if (data.data.hasOwnProperty('mail_accepted')) {
-				self.resultWildcard(data.data.mail_accepted);
+			if (data.data !== null) {
+				self.resultCatchall(data.data.mail_accepted);
 			} else {
-				self.resultWildcard(false);
+				self.resultCatchall(false);
 			}
 		});
 	};
