@@ -22,8 +22,8 @@ if (!$client->isConnected()) {
 
 $dialogs = array();
 
-array_push($dialogs, $client->command('HELO mailcheck.janbrodda.de'));
-array_push($dialogs, $client->command('MAIL FROM:<mailcheck@gmail.com>'));
+array_push($dialogs, $client->command('HELO ' . $config['hostname'] . ''));
+array_push($dialogs, $client->command('MAIL FROM:<' . $config['mailfrom'] . '>'));
 array_push($dialogs, $client->command('RCPT TO:<' . Request::$data['email'] . '>'));
 array_push($dialogs, $client->command('QUIT'));
 $client->disconnect();

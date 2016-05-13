@@ -15,19 +15,37 @@
     color: red;
 }
 
+.description {
+    text-align: center;
+}
+
 .statusicon {
     vertical-align: middle;
     font-size: 3em;
     margin-right: 10px;
+    display: block;
+    float: left;
+}
+
+.resultpanel td {
+    padding-bottom: 10px;
+}
+
+.clearfix:after {
+    content: ".";
+    clear: both;
+    display: block;
+    visibility: hidden;
+    height: 0px;
 }
 
 .smtpdialog pre {
     padding: 0;
     margin: 0;
     font-family: monospace;
-    border:0;
+    border: 0;
     background: transparent;
-    word-wrap:inherit;
+    word-wrap: inherit;
 }
 
 .smtpdialog .request {

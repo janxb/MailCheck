@@ -17,6 +17,9 @@ var App = function () {
 
 	self.enableHashUpdate = ko.observable(true);
 
+	self.changeEmailHash = function(){
+		window.location.hash = self.email();
+	}
 
 	self._init = function () {
 		$(window).on('hashchange', function () {
@@ -30,19 +33,14 @@ var App = function () {
 
 	self.checkEmailByHash = function () {
 		var hash = window.location.hash.substring(1);
-		if (!validateEmail(hash)) {
-			return;
-		}
 		self.email(hash);
-		self.checkMail();
+		self.smtpdialogs.removeAll();
+		if (hash !== '') {
+			self.checkMail();
+		}
 	};
 
 	self.checkMail = function () {
-		self.enableHashUpdate(false);
-		window.location.hash = self.email();
-		self.enableHashUpdate(false);
-		
-		self.smtpdialogs.removeAll();
 		checkEmailSingle();
 		checkEmailCatchall();
 	};

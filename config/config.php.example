@@ -1,0 +1,7 @@
+<?php
+
+$config = array(
+	'mailfrom' => 'mailcheck@example.org',
+	'hostname' => 'mailcheck.example.org',
+	'pagetitle' => 'MailCheck'
+);

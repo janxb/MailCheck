@@ -3,6 +3,8 @@
 ini_set('display_errors', true);
 set_include_path(dirname(__FILE__) . '/../classes');
 
+require_once '../config/config.php';
+
 function __autoload($class_name) {
 	$file = dirname(__FILE__) . '/../classes/' . $class_name . '.php';
 
