@@ -5,20 +5,20 @@ var Languages = {
 		enteremail: "enter email address..",
 
 		nomailhostfound: "This Domain is not configured for receiving mail",
-		emailinvalid: "The entered email adress is not valid",
+		emailinvalid: "The entered email address is not valid",
 		connectionfailed: "We could not connect to the mailserver",
 
-		emailnotexisting: "The email adress is not existing on the server.",
-		emailexisting: "The email adress is existing on the server.",
-		catchallexisting: "The server has a catchall adress activated. All adresses will be accepted.",
-		catchallnotexisting: "The server has to catchall adress, only selected adresses will be accepted.",
+		emailnotexisting: "The email address is not existing on the server.",
+		emailexisting: "The email address is existing on the server.",
+		catchallexisting: "The server has a catchall address activated. All addresses will be accepted.",
+		catchallnotexisting: "The server has to catchall address, only selected addresses will be accepted.",
 
 		smtpdialog: "SMTP Dialog with Server",
 		result: "Email Check Results",
 		checkingprogress:"Please Wait, checking Email.."
 	},
 	german: {
-		whichemail: "Welche Email-Adresse soll überprüft werden?"
+		whichemail: "Welche Email-addresse soll überprüft werden?"
 	}
 };
 

@@ -15,18 +15,44 @@ var App = function () {
 	self.resultSingle = ko.observable(false);
 	self.resultCatchall = ko.observable(false);
 
+	self.enableHashUpdate = ko.observable(true);
+
 
 	self._init = function () {
+		$(window).on('hashchange', function () {
+			if (self.enableHashUpdate()) {
+				self.checkEmailByHash();
+			}
+		});
+		self.checkEmailByHash();
 		return self;
 	};
 
-	self.checkMail = function () {
-		self.smtpdialogs.removeAll();
-		self.checkEmailSingle();
-		self.checkEmailCatchall();
+	self.checkEmailByHash = function () {
+		var hash = window.location.hash.substring(1);
+		if (!validateEmail(hash)) {
+			return;
+		}
+		self.email(hash);
+		self.checkMail();
 	};
 
-	self.checkEmailSingle = function () {
+	self.checkMail = function () {
+		self.enableHashUpdate(false);
+		window.location.hash = self.email();
+		self.enableHashUpdate(false);
+		
+		self.smtpdialogs.removeAll();
+		checkEmailSingle();
+		checkEmailCatchall();
+	};
+
+	var validateEmail = function (email) {
+		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+		return regex.test(email);
+	}
+
+	var checkEmailSingle = function () {
 		request('api/check_email.php', {email: self.email}, function (data) {
 			switch (data.error) {
 				case null:
@@ -52,7 +78,7 @@ var App = function () {
 		});
 	};
 
-	self.checkEmailCatchall = function () {
+	var checkEmailCatchall = function () {
 		request('api/check_catchall.php', {email: self.email}, function (data) {
 			if (data.data !== null) {
 				self.resultCatchall(data.data.mail_accepted);

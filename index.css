@@ -1,10 +1,10 @@
 * {
-    font-family:Arial;
+    font-family: Arial;
 }
 
 .panel-title {
     text-align: center;
-    font-weight:bold;
+    font-weight: bold;
 }
 
 .green {
@@ -16,15 +16,18 @@
 }
 
 .statusicon {
-    vertical-align:middle;
-    font-size:3em;
-    margin-right:10px;
+    vertical-align: middle;
+    font-size: 3em;
+    margin-right: 10px;
 }
 
-.smtpdialog p {
+.smtpdialog pre {
     padding: 0;
     margin: 0;
     font-family: monospace;
+    border:0;
+    background: transparent;
+    word-wrap:inherit;
 }
 
 .smtpdialog .request {
@@ -44,7 +47,7 @@
     left: 0;
     right: 0;
     background-color: #ccc;
-    font-weight:bold;
+    font-weight: bold;
 }
 
 .loading .inner {
@@ -59,11 +62,11 @@
 
 .cssload-loader {
     display: block;
-    margin:0 auto;
+    margin: 0 auto;
     width: 49px;
     height: 49px;
     position: relative;
-    border: 7px solid rgb(0,0,0);
+    border: 7px solid rgb(0, 0, 0);
     animation: cssload-loader 3s infinite ease;
     -o-animation: cssload-loader 3s infinite ease;
     -ms-animation: cssload-loader 3s infinite ease;
@@ -75,17 +78,13 @@
     vertical-align: top;
     display: inline-block;
     width: 100%;
-    background-color: rgb(0,0,0);
+    background-color: rgb(0, 0, 0);
     animation: cssload-loader-inner 3s infinite ease-in;
     -o-animation: cssload-loader-inner 3s infinite ease-in;
     -ms-animation: cssload-loader-inner 3s infinite ease-in;
     -webkit-animation: cssload-loader-inner 3s infinite ease-in;
     -moz-animation: cssload-loader-inner 3s infinite ease-in;
 }
-
-
-
-
 
 @keyframes cssload-loader {
     0% {

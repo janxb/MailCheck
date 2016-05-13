@@ -59,8 +59,8 @@
 			</div>
 			<div class="panel-body" data-bind="foreach:smtpdialogs">
 				<div class="smtpdialog">
-					<p class="request" data-bind="text:request"></p>
-					<p class="response" data-bind="text:response"></p>
+					<pre class="request" data-bind="text:request"></pre>
+					<pre class="response" data-bind="text:response"></pre>
 				</div>
 			</div>
 		</div>
@@ -77,8 +77,8 @@
 
 
 		<script src="//cdn.jsdelivr.net/g/jquery@2.2.2,knockout@3.4.0,js-cookie@2.2.0,spinjs@2.3.2,sweetalert@1.1.3"></script>
-		<script src="config.js"></script>
-		<script src="translations.js"></script>
-		<script src="index.js"></script>
+		<script src="config.js<?= APP_VERSION ?>"></script>
+		<script src="translations.js<?= APP_VERSION ?>"></script>
+		<script src="index.js<?= APP_VERSION ?>"></script>
 	</body>
 </html>
