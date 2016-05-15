@@ -1,4 +1,5 @@
 <?php
+define('APP_VERSION', '?_v=' . str_replace("\n", '', `svn info 2>/dev/null . | grep "Revision" | awk '{print $2}'`));
 require_once 'config/config.php';
 ?>
 <!DOCTYPE html>
@@ -8,7 +9,7 @@ require_once 'config/config.php';
 		<title><?= $config['pagetitle'] ?></title>
 		<link rel="stylesheet" href="//cdn.jsdelivr.net/g/bootstrap@3.3.6(css/bootstrap.min.css),sweetalert@1.1.3(sweetalert.css)">
 		<link rel="stylesheet" href="//cdn.jsdelivr.net/fontawesome/4.6.2/css/font-awesome.min.css"/>
-		<link rel="stylesheet" href="index.css"/>
+		<link rel="stylesheet" href="index.css<?= APP_VERSION ?>"/>
 	</head>
 	<body>
 		<div class="panel panel-success">
@@ -97,8 +98,8 @@ require_once 'config/config.php';
 
 
 		<script src="//cdn.jsdelivr.net/g/jquery@2.2.2,knockout@3.4.0,js-cookie@2.2.0,spinjs@2.3.2,sweetalert@1.1.3"></script>
-		<script src="config/config.js"></script>
-		<script src="translations.js"></script>
-		<script src="index.js"></script>
+		<script src="config/config.js<?= APP_VERSION ?>"></script>
+		<script src="translations.js<?= APP_VERSION ?>"></script>
+		<script src="index.js<?= APP_VERSION ?>"></script>
 	</body>
 </html>
