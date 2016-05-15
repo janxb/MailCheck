@@ -37,8 +37,10 @@ var App = function () {
 
 	self.loadLanguageCookie = function () {
 		var language = Cookies.get('language');
-		if (language !== null) {
+		if (Languages[language] !== undefined) {
 			self.changeLanguage(language);
+		} else {
+			self.changeLanguage(Config.language);
 		}
 	};
 
