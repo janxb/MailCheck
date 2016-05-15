@@ -1,7 +1,7 @@
 var Languages = {
-	english: {
+	English: {
 		whichemail: "Which email address should be checked?",
-		checkemail: "Check!",
+		checkemail: "Check Email!",
 		enteremail: "enter email address..",
 
 		nomailhostfound: "This Domain is not configured for receiving mail",
@@ -20,9 +20,11 @@ var Languages = {
 		whatisthis: "How is this tool working?",
 		description: "This tools asks the receiving mail server, if he would take the address you provided.<br>" +
 		"If he accepts to take the mail, the tool aborts the communication before any mail is sent.<br>" +
-		"Because of the way it works, the recipient has no idea that you checked his account!"
+		"Because of the way it works, the recipient has no idea that you checked his account!",
+
+		language: "Change Language"
 	},
-	german: {
+	German: {
 		whichemail: "Welche Email Addresse soll überprüft werden?",
 		checkemail: "Adresse überprüfen!",
 		enteremail: "Email Adresse eingeben..",
@@ -43,19 +45,23 @@ var Languages = {
 		whatisthis: "Wie funktioniert das hier?",
 		description: "Dieses Tool fragt beim empfangenden Mailserver nach, ob er die angegebene Adresse akzeptiert.<br>" +
 		"Wenn er bestätigt, die Email anzunehmen, wird die Kommunikation abgebrochen.<br>" +
-		"Durch den Abbruch bevor eine Nachricht gesendet wird, erfährt der Empfänger nicht, dass sein Account überprüft wurde!"
+		"Durch den Abbruch bevor eine Nachricht gesendet wird, erfährt der Empfänger nicht, dass sein Account überprüft wurde!",
+
+		language: "Sprache wechseln"
 	}
 };
 
 var Translation = {
 	get: function (key) {
-		var value = Languages[Config.language][key];
-		if (value === undefined) {
+		if (Languages[Config.language] === undefined ||
+			Languages[Config.language][key] === undefined) {
 			console.error("Missing Translation for '" + key + "' at Language '" + Config.language + "'");
-			value = Languages['english'][key];
+			var value = Languages['English'][key];
 			if (value === undefined) {
-				value = '== MISSING TRANSLATION: ' + key + ' ==';
+				return '== MISSING TRANSLATION: ' + key + ' ==';
 			}
+		} else {
+			return Languages[Config.language][key]
 		}
 		return value;
 	}

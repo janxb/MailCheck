@@ -8,27 +8,52 @@ var App = function () {
 	}, self);
 
 	self.smtpdialogs = ko.observableArray();
+	self.resultSingle = ko.observable(false);
+	self.resultCatchall = ko.observable(false);
 	self.resultavailable = ko.computed(function () {
 		return self.smtpdialogs().length > 0;
 	}, self);
 
-	self.resultSingle = ko.observable(false);
-	self.resultCatchall = ko.observable(false);
+	self.availableLanguages = ko.computed(function () {
+		var languages = [];
+		for (var language in Languages) {
+			//noinspection JSUnfilteredForInLoop
+			languages.push(language);
+		}
+		return languages;
+	}, self);
 
-	self.enableHashUpdate = ko.observable(true);
+	self.changeLanguage = function (language) {
+		self.language(language);
+		Config.language = self.language();
+		Cookies.set('language', language, {expires: 99999});
+	};
 
-	self.changeEmailHash = function(){
-		window.location.hash = self.email();
-	}
+	self.language = ko.observable(Config.language);
+	self.translation = ko.computed(function () {
+		Config.language = self.language();
+		return Translation;
+	}, self);
+
+	self.loadLanguageCookie = function () {
+		var language = Cookies.get('language');
+		if (language !== null) {
+			self.changeLanguage(language);
+		}
+	};
+
 
 	self._init = function () {
+		self.loadLanguageCookie();
 		$(window).on('hashchange', function () {
-			if (self.enableHashUpdate()) {
-				self.checkEmailByHash();
-			}
+			self.checkEmailByHash();
 		});
 		self.checkEmailByHash();
 		return self;
+	};
+
+	self.changeEmailHash = function () {
+		window.location.hash = self.email();
 	};
 
 	self.checkEmailByHash = function () {
@@ -45,19 +70,16 @@ var App = function () {
 		checkEmailCatchall();
 	};
 
-	var validateEmail = function (email) {
-		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-		return regex.test(email);
-	}
-
 	var checkEmailSingle = function () {
 		request('api/check_email.php', {email: self.email}, function (data) {
 			switch (data.error) {
 				case null:
+					//noinspection JSUnresolvedVariable
 					data.data.dialogs.forEach(function (dialog) {
 						self.smtpdialogs.push(dialog);
 					});
 					if (data.data !== null) {
+						//noinspection JSUnresolvedVariable
 						self.resultSingle(data.data.mail_accepted);
 					} else {
 						self.resultSingle(false);
@@ -79,6 +101,7 @@ var App = function () {
 	var checkEmailCatchall = function () {
 		request('api/check_catchall.php', {email: self.email}, function (data) {
 			if (data.data !== null) {
+				//noinspection JSUnresolvedVariable
 				self.resultCatchall(data.data.mail_accepted);
 			} else {
 				self.resultCatchall(false);
