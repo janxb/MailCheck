@@ -81,7 +81,7 @@ require_once 'config/config.php';
 				<h3 class="panel-title" data-bind="text:translation().get('language')"></h3>
 			</div>
 			<div class="panel-body" data-bind="foreach:availableLanguages()">
-				<button class="btn btn-default" data-bind="text:$data, event: { click: $root.changeLanguage }, css: { 'btn-success': $root.language() === $data }">
+				<button class="btn btn-default" data-bind="text:$data, event: { click: $root.changeLanguage }, css: { 'btn-primary': $root.language() === $data }">
 				</button>
 			</div>
 		</div>
