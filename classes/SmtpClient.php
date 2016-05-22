@@ -24,12 +24,16 @@ class SmtpClient {
 
 	private function readSocket() {
 		$completeOutput = '';
+		$currentResponseLine = 0;
+		$maxResponseLines = 10;
 
 		do {
+			if (++$currentResponseLine > $maxResponseLines) {
+				break;
+			}
 			$output = fgets($this->socket, 4000);
 			$completeOutput .= $output;
 			$status = intval(substr($output, 0, 3));
-
 		} while (substr($output, 3, 1) != ' ');
 
 		return (new SmtpFlow())->withStatus($status)->withResponse($completeOutput);
@@ -43,7 +47,8 @@ class SmtpClient {
 	}
 
 	function isConnected() {
-		return $this->socket !== null;
+		return $this->socket !== null
+		&& $this->socket !== false;
 	}
 
 
