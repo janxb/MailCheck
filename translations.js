@@ -11,7 +11,7 @@ var Languages = {
 		emailnotexisting: "The email address is not existing on the server.",
 		emailexisting: "The email address is existing on the server.",
 		catchallexisting: "The server has a catchall address activated. All addresses will be accepted.",
-		catchallnotexisting: "The server has to catchall address, only selected addresses will be accepted.",
+		catchallnotexisting: "The server has no catchall address, only existing addresses will be accepted.",
 
 		smtpdialog: "SMTP Dialog with Server",
 		result: "Email Check Results",
