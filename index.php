@@ -101,5 +101,10 @@ require_once 'config/config.php';
 		<script src="config/config.js<?= APP_VERSION ?>"></script>
 		<script src="translations.js<?= APP_VERSION ?>"></script>
 		<script src="index.js<?= APP_VERSION ?>"></script>
+
+        <?php
+        if (file_exists("tracking.html"))
+            readfile("tracking.html");
+        ?>
 	</body>
 </html>
